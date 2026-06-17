@@ -1,0 +1,27 @@
+# Raw data — too large for git, see README for download instructions
+data/
+BVBRC_genome_amr*.csv
+specialty_genes_raw.parquet
+feature_matrix.parquet
+
+# Generated outputs
+predictions_*.txt
+amr_genes_*.tsv
+results.txt
+query_progress.json
+workdir_*/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# macOS
+.DS_Store
+
+# Checkpoints / temp
+*.tmp
+assembly/
