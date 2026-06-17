@@ -123,7 +123,10 @@ st.title("E. coli AMR Predictor")
 
 models = load_models()
 
-text_color = "white" if st.get_option("theme.base") == "dark" else "black"
+dark_mode = st.get_option("theme.base") == "dark"
+text_color = "white" if dark_mode else "black"
+res_color  = "#8b0000" if dark_mode else "#ffb3b3"
+sus_color  = "#1a5c1a" if dark_mode else "#b3ffb3"
 
 tab1, tab2 = st.tabs(["From BV-BRC Genome ID", "From Sequencing File"])
 
@@ -159,7 +162,7 @@ with tab1:
                             preds[ab] = (pred, conf, mic)
                         df = build_results_df(preds)
                         def style_row(row):
-                            color = "#8b0000" if row["Result"]=="Resistant" else "#1a5c1a"
+                            color = res_color if row["Result"]=="Resistant" else sus_color
                             return [f"background-color: {color}; color: {text_color}"]*len(row)
                         st.dataframe(df.style.apply(style_row, axis=1), hide_index=True, use_container_width=True)
                         if not genes_df.empty:
@@ -225,7 +228,7 @@ with tab2:
                         st.markdown(f"#### {label}")
                         df = build_results_df(preds)
                         def style_row(row):
-                            color = "#8b0000" if row["Result"]=="Resistant" else "#1a5c1a"
+                            color = res_color if row["Result"]=="Resistant" else sus_color
                             return [f"background-color: {color}; color: {text_color}"]*len(row)
                         st.dataframe(df.style.apply(style_row, axis=1), hide_index=True, use_container_width=True)
                         if not genes_df.empty:
