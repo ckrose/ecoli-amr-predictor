@@ -158,11 +158,11 @@ with tab1:
                             preds[ab] = (pred, conf, mic)
                         df = build_results_df(preds)
                         def style_row(row):
-                            color = "#ffcccc" if row["Result"]=="Resistant" else "#ccffcc"
-                            return [f"background-color: {color}"]*len(row)
+                            color = "#8b0000" if row["Result"]=="Resistant" else "#1a5c1a"
+                            return [f"background-color: {color}; color: white"]*len(row)
                         st.dataframe(df.style.apply(style_row, axis=1), hide_index=True, use_container_width=True)
                         if not genes_df.empty:
-                            hits = genes_df[genes_df["genome_id"]==gid]["gene"].tolist()
+                            hits = [g for g in genes_df[genes_df["genome_id"]==gid]["gene"].tolist() if isinstance(g, str)]
                             if hits:
                                 st.caption(f"AMR genes detected: {', '.join(hits[:15])}")
                         st.divider()
@@ -224,8 +224,8 @@ with tab2:
                         st.markdown(f"#### {label}")
                         df = build_results_df(preds)
                         def style_row(row):
-                            color = "#ffcccc" if row["Result"]=="Resistant" else "#ccffcc"
-                            return [f"background-color: {color}"]*len(row)
+                            color = "#8b0000" if row["Result"]=="Resistant" else "#1a5c1a"
+                            return [f"background-color: {color}; color: white"]*len(row)
                         st.dataframe(df.style.apply(style_row, axis=1), hide_index=True, use_container_width=True)
                         if not genes_df.empty:
                             amr_hits = genes_df[genes_df.get("element_type", pd.Series(["AMR"]*len(genes_df)))=="AMR"]["gene"].tolist()
