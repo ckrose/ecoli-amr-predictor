@@ -124,6 +124,8 @@ st.caption("Predicts antibiotic resistance from genomic data using XGBoost. For 
 
 models = load_models()
 
+text_color = "white" if st.get_option("theme.base") == "dark" else "black"
+
 tab1, tab2 = st.tabs(["From BV-BRC Genome ID", "From Sequencing File"])
 
 # ── Tab 1: BV-BRC ─────────────────────────────────────────────────────────────
@@ -159,7 +161,7 @@ with tab1:
                         df = build_results_df(preds)
                         def style_row(row):
                             color = "#8b0000" if row["Result"]=="Resistant" else "#1a5c1a"
-                            return [f"background-color: {color}; color: white"]*len(row)
+                            return [f"background-color: {color}; color: {text_color}"]*len(row)
                         st.dataframe(df.style.apply(style_row, axis=1), hide_index=True, use_container_width=True)
                         if not genes_df.empty:
                             hits = [g for g in genes_df[genes_df["genome_id"]==gid]["gene"].tolist() if isinstance(g, str)]
@@ -225,7 +227,7 @@ with tab2:
                         df = build_results_df(preds)
                         def style_row(row):
                             color = "#8b0000" if row["Result"]=="Resistant" else "#1a5c1a"
-                            return [f"background-color: {color}; color: white"]*len(row)
+                            return [f"background-color: {color}; color: {text_color}"]*len(row)
                         st.dataframe(df.style.apply(style_row, axis=1), hide_index=True, use_container_width=True)
                         if not genes_df.empty:
                             amr_hits = genes_df[genes_df.get("element_type", pd.Series(["AMR"]*len(genes_df)))=="AMR"]["gene"].tolist()
