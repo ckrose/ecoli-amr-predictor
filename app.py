@@ -120,7 +120,6 @@ def build_results_df(preds):
 # ── page setup ────────────────────────────────────────────────────────────────
 st.set_page_config(page_title="E. coli AMR Predictor", layout="centered")
 st.title("E. coli AMR Predictor")
-st.caption("Predicts antibiotic resistance from genomic data using XGBoost. For research use only.")
 
 models = load_models()
 
@@ -236,5 +235,3 @@ with tab2:
                 except Exception as e:
                     st.error(f"Error: {e}")
 
-st.divider()
-st.caption("For research use only · Not for clinical diagnosis · EUCAST 2024 breakpoints")
