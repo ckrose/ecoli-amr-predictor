@@ -118,13 +118,13 @@ def build_results_df(preds):
     return pd.DataFrame(rows)
 
 # ── page setup ────────────────────────────────────────────────────────────────
-st.set_page_config(page_title="E. coli AMR Predictor", page_icon="🧬", layout="centered")
-st.title("🧬 E. coli AMR Predictor")
+st.set_page_config(page_title="E. coli AMR Predictor", layout="centered")
+st.title("E. coli AMR Predictor")
 st.caption("Predicts antibiotic resistance from genomic data using XGBoost. For research use only.")
 
 models = load_models()
 
-tab1, tab2 = st.tabs(["🔬 From BV-BRC Genome ID", "📂 From Sequencing File"])
+tab1, tab2 = st.tabs(["From BV-BRC Genome ID", "From Sequencing File"])
 
 # ── Tab 1: BV-BRC ─────────────────────────────────────────────────────────────
 with tab1:
